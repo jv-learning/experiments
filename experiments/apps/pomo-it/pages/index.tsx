@@ -2,16 +2,18 @@ import styles from './index.module.scss';
 import Link from 'next/link';
 import PomoTimer from '../components/pomo-timer/pomo-timer';
 import { useRef, useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
 
 export function Index() {
   // properties
   const timeValueInput = useRef(null);
-  const [timeValue, setTimeValue] = useState<number>(0);
+  const [timeValue, setTimeValue] = useState<number>(23 * 60);
   const timerInterval = useRef(null);
-  const [timer, setTimer] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(23 * 60);
 
   // methods
   useEffect(() => {
+    console.log({ DateTime });
     return () => {
       clearInterval(timerInterval.current);
     };
@@ -33,6 +35,15 @@ export function Index() {
     );
   }
 
+  function stopTimer() {
+    clearInterval(timerInterval.current);
+  }
+
+  function formatTime(timeValue: number) {
+    return `${`${~~(timeValue / 60)}`.padStart(2, '0')}:${`${
+      timeValue % 60
+    }`.padStart(2, '0')}`;
+  }
   // render
   return (
     <div className={styles.page}>
@@ -56,15 +67,16 @@ export function Index() {
                     ref={timeValueInput}
                     defaultValue={25}
                     required
-                    onChange={(event) => setTimeValue(+event.target.value)}
+                    onChange={(event) => setTimeValue(+event.target.value * 60)}
                   />
                 </form>
               </h2>
-              <button onClick={handleOnStartClick}> START</button>
+              <button onClick={handleOnStartClick}>START</button>
+              <button onClick={stopTimer}>STOP</button>
             </div>
             <div className="logo-container">
               {/* <PomoTimer time={timeValueInput.current?.value} /> */}
-              {timeValue}
+              {formatTime(timeValue)}
             </div>
           </div>
 
