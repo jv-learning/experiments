@@ -1,12 +1,39 @@
 import styles from './index.module.scss';
 import Link from 'next/link';
+import PomoTimer from '../components/pomo-timer/pomo-timer';
+import { useRef, useState, useEffect } from 'react';
 
 export function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.scss file.
-   */
+  // properties
+  const timeValueInput = useRef(null);
+  const [timeValue, setTimeValue] = useState<number>(0);
+  const timerInterval = useRef(null);
+  const [timer, setTimer] = useState<number>(0);
+
+  // methods
+  useEffect(() => {
+    return () => {
+      clearInterval(timerInterval.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (timeValue <= 0) {
+      alert('Time is up!');
+      clearInterval(timerInterval.current);
+    }
+  }, [timeValue]);
+
+  function handleOnStartClick() {
+    // alert('hey');
+    // startCountdown();
+    timerInterval.current = setInterval(
+      () => setTimeValue((curr) => curr - 1),
+      1000
+    );
+  }
+
+  // render
   return (
     <div className={styles.page}>
       <div className="wrapper">
@@ -18,24 +45,27 @@ export function Index() {
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                  />
-                </svg>
                 <span>Time your day</span>
+                <form onSubmit={null}>
+                  <label htmlFor="name">Minutes:</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="number"
+                    autoComplete="name"
+                    ref={timeValueInput}
+                    defaultValue={25}
+                    required
+                    onChange={(event) => setTimeValue(+event.target.value)}
+                  />
+                </form>
               </h2>
-              <a href="#commands"> What&apos;s next? </a>
+              <button onClick={handleOnStartClick}> START</button>
             </div>
-            <div className="logo-container"></div>
+            <div className="logo-container">
+              {/* <PomoTimer time={timeValueInput.current?.value} /> */}
+              {timeValue}
+            </div>
           </div>
 
           <div id="middle-content">

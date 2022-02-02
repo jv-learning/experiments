@@ -121,7 +121,8 @@ pre {
 #hero .text-container h2 span {
   margin-left: 2.5rem;
 }
-#hero .text-container a {
+#hero .text-container a,
+#hero .text-container button {
   background-color: rgba(255, 255, 255, 1);
   border-radius: 0.75rem;
   color: rgba(55, 65, 81, 1);
@@ -135,6 +136,7 @@ pre {
   justify-content: center;
   padding-left: 2rem;
   padding-right: 2rem;
+  color: #fff;
 }
 #hero .logo-container svg {
   color: rgba(255, 255, 255, 1);
@@ -309,7 +311,8 @@ pre {
 #nx-cloud pre {
   margin-top: 1rem;
 }
-#nx-cloud a {
+#nx-cloud a,
+#nx-cloud button {
   color: rgba(107, 114, 128, 1);
   display: block;
   font-size: 0.875rem;
