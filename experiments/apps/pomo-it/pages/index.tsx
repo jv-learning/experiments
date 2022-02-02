@@ -23,6 +23,7 @@ export function Index() {
     if (timeValue <= 0) {
       alert('Time is up!');
       clearInterval(timerInterval.current);
+      navigator?.vibrate(200);
     }
   }, [timeValue]);
 
