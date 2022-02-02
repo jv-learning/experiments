@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "pomo-it": "apps/pomo-it",
+    "pomo-it-e2e": "apps/pomo-it-e2e"
+  }
+}

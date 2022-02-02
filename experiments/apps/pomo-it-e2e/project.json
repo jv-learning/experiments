@@ -1,0 +1,28 @@
+{
+  "root": "apps/pomo-it-e2e",
+  "sourceRoot": "apps/pomo-it-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/pomo-it-e2e/cypress.json",
+        "devServerTarget": "pomo-it:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "pomo-it:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/pomo-it-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["pomo-it"]
+}
