@@ -21,9 +21,9 @@ export function Index() {
 
   useEffect(() => {
     if (timeValue <= 0) {
-      alert('Time is up!');
       clearInterval(timerInterval.current);
-      navigator?.vibrate(200);
+      navigator?.vibrate([800, 200, 500, 200]);
+      alert('Time is up!');
     }
   }, [timeValue]);
 
